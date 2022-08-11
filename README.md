@@ -3,7 +3,6 @@
 ## Techs
 
 - Next.js
-- vanilla-extract
 - Storybook
 - Redux Toolkit
 - RTK Query
