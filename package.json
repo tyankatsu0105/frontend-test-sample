@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "next lint",
     "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "gen:api": " npx @rtk-query/codegen-openapi codegen.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.8.4",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.18.10",
+    "@rtk-query/codegen-openapi": "1.0.0",
     "@storybook/addon-actions": "6.5.10",
     "@storybook/addon-essentials": "6.5.10",
     "@storybook/addon-interactions": "6.5.10",

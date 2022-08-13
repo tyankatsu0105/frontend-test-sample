@@ -1,7 +1,10 @@
 import "the-new-css-reset/css/reset.css";
 import "../styles/globals.css";
+import { App } from "./decorators/app";
 
-export const parameters = {
+import { Parameters } from "@storybook/react";
+
+export const parameters: Parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
@@ -10,3 +13,5 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [App];
