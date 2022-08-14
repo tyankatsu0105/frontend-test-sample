@@ -21,6 +21,6 @@ export const Primary: Storybook.StoryType<typeof Page> = {
   play: async () => {
     const text = screen.getByText("error");
 
-    expect(text.textContent).toBe("error");
+    await expect(text.textContent).toBe("error");
   },
 };

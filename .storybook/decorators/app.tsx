@@ -9,10 +9,10 @@ import { createStore } from "../../store/index";
 
 const store = createStore();
 
-export const App: DecoratorFn = (Story) => {
+export const App: DecoratorFn = (Story, context) => {
   return (
     <Provider store={store}>
-      <Story />
+      <Story {...context} />
     </Provider>
   );
 };
