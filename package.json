@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:scss-modules": "typed-scss-modules . --ignore node_modules",
-    "dev:scss-modules": "npm run build:scss-modules --ignoreInitial -w",
+    "dev:scss-modules": "typed-scss-modules . --ignore node_modules --ignoreInitial -w",
     "dev:next": "next dev",
     "build:next": "next build",
     "dev": "run-p dev:next dev:scss-modules",

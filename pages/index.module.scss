@@ -1,17 +1,5 @@
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-items: center;
-
-  .error {
-    color: red;
-  }
-  .warn {
-    color: yellow;
-  }
-
-  [data-level="info"] {
-    color: skyblue;
+.card {
+  & + & {
+    margin-top: 12px;
   }
 }
