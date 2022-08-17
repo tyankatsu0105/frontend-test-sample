@@ -1,22 +1,28 @@
+// import AbortController from "abort-controller";
+// import fgetch, { Headers, Request, Response } from "node-fetch";
+
+// Object.assign(globalThis, {
+//   fetch,
+//   Headers,
+//   Request,
+//   Response,
+//   AbortController,
+// });
+
 import type { AppProps } from "next/app";
 import "the-new-css-reset/css/reset.css";
 import "../styles/globals.css";
 
-import { Provider } from "react-redux";
-import { createStore } from "~store/index";
+import { wrapper } from "~store/index";
 
 import { Main } from "~design/layouts";
 
-const store = createStore();
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <Main>
-        <Component {...pageProps} />
-      </Main>
-    </Provider>
+    <Main>
+      <Component {...pageProps} />
+    </Main>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
