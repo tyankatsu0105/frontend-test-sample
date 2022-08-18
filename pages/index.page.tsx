@@ -7,8 +7,9 @@ import styles from "./index.module.scss";
 import { wrapper } from "~store/index";
 
 import { api } from "~store/api";
+import type { MultipleArticlesResponse } from "~store/api";
 
-const Home: NextPage = () => {
+const Home: NextPage<MultipleArticlesResponse> = () => {
   const { data } = useArticles();
 
   return (
