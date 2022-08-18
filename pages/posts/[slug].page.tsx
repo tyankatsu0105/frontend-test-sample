@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 interface Params extends ParsedUrlQuery {
   slug: string;
 }
-type Props = SingleArticleResponse | {};
+type Props = SingleArticleResponse | false;
 
 export const getStaticProps = wrapper.getStaticProps<Props>(
   (store) => async (context) => {
@@ -36,18 +36,21 @@ export const getStaticProps = wrapper.getStaticProps<Props>(
     const { data } = await result;
 
     return {
-      props: data || {},
+      props: data || false,
     };
   }
 );
 
 const Post: NextPage<Props> = (props) => {
-  console.log({ props });
+  if (!props) return <></>;
 
-  const { query } = useRouter();
-  const { slug } = query as { slug: string };
-
-  return <Page title="Post">aaa</Page>;
+  return (
+    <Page title="Post">
+      <pre>
+        <code>{JSON.stringify(props, null, 4)}</code>
+      </pre>
+    </Page>
+  );
 };
 
 export default Post;
