@@ -9,4 +9,5 @@ export const emptySplitApi = createApi({
       return action.payload[reducerPath];
     }
   },
+  refetchOnMountOrArgChange: 900,
 });
