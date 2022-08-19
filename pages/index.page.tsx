@@ -1,12 +1,10 @@
-import type { NextPage, GetServerSideProps } from "next";
+import type { NextPage, GetStaticPaths } from "next";
 import { useArticles } from "./index.facade";
 import { Page } from "~design/layouts";
 import { Card } from "~design/components";
 import Link from "next/link";
 import styles from "./index.module.scss";
-import { wrapper } from "~store/index";
 
-import { api } from "~store/api";
 import type { MultipleArticlesResponse } from "~store/api";
 
 const Home: NextPage<MultipleArticlesResponse> = () => {
@@ -36,16 +34,5 @@ const Home: NextPage<MultipleArticlesResponse> = () => {
     </Page>
   );
 };
-
-export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (context) => {
-    store.dispatch(api.endpoints.getArticles.initiate({}));
-
-    await Promise.all(api.util.getRunningOperationPromises());
-
-    return {
-      props: {},
-    };
-  });
 
 export default Home;
