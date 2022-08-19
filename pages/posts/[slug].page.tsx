@@ -1,14 +1,17 @@
-import type { NextPage, GetStaticPaths, InferGetStaticPropsType } from "next";
+import type { NextPage, GetStaticPaths } from "next";
 
 import { Page } from "~design/layouts";
 
-import { useRouter } from "next/router";
 import { wrapper } from "~store/index";
 import { ParsedUrlQuery } from "querystring";
 
-import { api, SingleArticleResponse } from "~store/api";
+import { api } from "~store/api";
+import { useArticle } from "./[slug].facade";
 
 import { createStore } from "~store/index";
+
+import { Card } from "~design/components";
+import { useRouter } from "next/router";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const store = createStore();
@@ -24,9 +27,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 interface Params extends ParsedUrlQuery {
   slug: string;
 }
-type Props = SingleArticleResponse | false;
 
-export const getStaticProps = wrapper.getStaticProps<Props>(
+export const getStaticProps = wrapper.getStaticProps(
   (store) => async (context) => {
     const { slug } = context.params as Params;
     const result = store.dispatch(api.endpoints.getArticle.initiate({ slug }));
@@ -35,20 +37,36 @@ export const getStaticProps = wrapper.getStaticProps<Props>(
 
     const { data } = await result;
 
+    if (!data) {
+      return {
+        notFound: true,
+      };
+    }
+
     return {
-      props: data || false,
+      props: {},
+      revalidate: 60,
     };
   }
 );
 
-const Post: NextPage<Props> = (props) => {
-  if (!props) return <></>;
+const Post: NextPage = () => {
+  const router = useRouter();
+
+  const { slug } = router.query as Params;
+  const { data } = useArticle({
+    slug,
+    skip: router.isFallback,
+  });
 
   return (
-    <Page title="Post">
-      <pre>
-        <code>{JSON.stringify(props, null, 4)}</code>
-      </pre>
+    <Page title={data?.article.title}>
+      <Card
+        renderHead={({ styles }) => (
+          <h2 className={styles.heading}>{data?.article.description}</h2>
+        )}
+        renderBody={() => <p>{data?.article.body}</p>}
+      />
     </Page>
   );
 };

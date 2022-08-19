@@ -20,7 +20,7 @@ export const createStore = (preloadedState?: PreloadedState) => {
 };
 
 export const wrapper = createWrapper<AppState>(() => createStore(), {
-  debug: true,
+  debug: process.env.NODE_ENV !== "production",
 });
 
 // ==================================================

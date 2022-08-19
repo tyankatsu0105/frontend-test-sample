@@ -7,7 +7,7 @@ import Link from "next/link";
 // =========================
 
 type Props = {
-  readonly title: string;
+  readonly title: string | undefined;
   readonly children: React.ReactNode;
 };
 
