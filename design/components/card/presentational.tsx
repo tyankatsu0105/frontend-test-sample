@@ -1,17 +1,17 @@
 import React from "react";
+
 import styles from "./presentational.module.scss";
-import Link from "next/link";
 
 // =========================
 // props
 // =========================
 
 type Props = {
+  readonly className?: React.ComponentProps<"div">["className"];
+  readonly renderBody: () => React.ReactNode;
   readonly renderHead: (props: {
     styles: { heading: typeof styles.heading };
   }) => React.ReactNode;
-  readonly renderBody: () => React.ReactNode;
-  readonly className?: React.ComponentProps<"div">["className"];
 };
 
 // =========================

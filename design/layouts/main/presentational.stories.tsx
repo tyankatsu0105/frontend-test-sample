@@ -1,10 +1,8 @@
 import * as React from "react";
 
-import { Main } from "./index";
-
 import { Storybook } from "~shared/modules";
-import { screen } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+
+import { Main } from "./index";
 
 export default {
   component: Main,
@@ -17,5 +15,4 @@ const Template: Storybook.StoryType<typeof Main> = {
 
 export const Primary: Storybook.StoryType<typeof Main> = {
   ...Template,
-  name: "Primary",
 };

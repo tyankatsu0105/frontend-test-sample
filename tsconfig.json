@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "~design/*": ["design/*"],
+      "~pages/*": ["pages/*"],
       "~storybook/*": ["storybook/*"],
       "~shared/*": ["shared/*"],
       "~store/*": ["store/*"]

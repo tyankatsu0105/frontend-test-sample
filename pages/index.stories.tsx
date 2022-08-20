@@ -1,11 +1,11 @@
+import { expect } from "@storybook/jest";
+import { screen } from "@storybook/testing-library";
 import * as React from "react";
 
-import Page from "./index.page";
 import { Main } from "~design/layouts";
-
 import { Storybook } from "~shared/modules";
-import { screen } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+
+import Page from "./index.page";
 
 export default {
   component: Page,
@@ -22,7 +22,6 @@ const Template: Storybook.StoryType<typeof Page> = {
 
 export const Primary: Storybook.StoryType<typeof Page> = {
   ...Template,
-  name: "Primary",
   play: async () => {
     const text = screen.getByText("error");
 

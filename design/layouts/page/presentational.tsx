@@ -1,14 +1,14 @@
 import React from "react";
+
 import styles from "./presentational.module.scss";
-import Link from "next/link";
 
 // =========================
 // props
 // =========================
 
 type Props = {
-  readonly title: string | undefined;
   readonly children: React.ReactNode;
+  readonly title: string | undefined;
 };
 
 // =========================

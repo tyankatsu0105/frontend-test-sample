@@ -1,21 +1,23 @@
-import type { NextPage, GetStaticPaths } from "next";
-import { useArticles } from "./index.facade";
-import { Page } from "~design/layouts";
-import { Card } from "~design/components";
 import Link from "next/link";
+
+import { Card } from "~design/components";
+import { Page } from "~design/layouts";
+import { Main } from "~design/layouts";
+import { Next } from "~shared/modules";
+
+import { useArticles } from "./index.facade";
 import styles from "./index.module.scss";
 
-import type { MultipleArticlesResponse } from "~store/api";
-
-const Home: NextPage<MultipleArticlesResponse> = () => {
+const Home: Next.NextPageWithLayout = () => {
   const { data } = useArticles();
 
   return (
     <Page title="Top">
       {data?.articles.map((article, index) => (
         <Card
-          className={styles.card}
           key={index}
+          className={styles.card}
+          renderBody={() => <p>{article.body}</p>}
           renderHead={(props) => (
             <Link
               href={{
@@ -28,11 +30,12 @@ const Home: NextPage<MultipleArticlesResponse> = () => {
               </a>
             </Link>
           )}
-          renderBody={() => <p>{article.body}</p>}
         />
       ))}
     </Page>
   );
 };
+
+Home.getLayout = Next.getLayout((page) => <Main>{page}</Main>);
 
 export default Home;
