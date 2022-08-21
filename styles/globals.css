@@ -4,4 +4,10 @@ html {
 body {
   color: white;
   background: #1f2f54;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+*:focus-visible {
+  outline: 3px solid rgb(165, 248, 255);
 }

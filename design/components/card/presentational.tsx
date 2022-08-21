@@ -19,7 +19,7 @@ type Props = {
 // =========================
 
 const Component = (props: Props): JSX.Element => (
-  <div className={`${styles.wrap} ${props.className}`}>
+  <div className={`${styles.container} ${props.className}`}>
     <div className={styles.head}>
       {props.renderHead({ styles: { heading: styles.heading } })}
     </div>

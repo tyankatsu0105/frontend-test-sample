@@ -7,6 +7,7 @@ import styles from "./presentational.module.scss";
 // =========================
 
 type Props = {
+  readonly align?: "center";
   readonly children: React.ReactNode;
   readonly title: string | undefined;
 };
@@ -17,7 +18,9 @@ type Props = {
 
 const Component = (props: Props): React.ReactElement => (
   <>
-    <h1 className={styles.heading}>{props.title}</h1>
+    <h1 className={styles.heading} data-align={props.align}>
+      {props.title}
+    </h1>
 
     <div className={styles.contents}>{props.children}</div>
   </>

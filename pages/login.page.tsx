@@ -4,7 +4,7 @@ import { Next } from "~shared/modules";
 
 const Login: Next.NextPageWithLayout = () => {
   return (
-    <Page title="Sign in">
+    <Page align="center" title="Sign in">
       <p>aaaaaaaaaaaaa</p>
     </Page>
   );

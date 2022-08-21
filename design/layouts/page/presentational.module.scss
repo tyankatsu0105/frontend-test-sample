@@ -1,6 +1,10 @@
 .heading {
   font-size: 30px;
   font-weight: bold;
+
+  &[data-align="center"] {
+    text-align: center;
+  }
 }
 
 .contents {

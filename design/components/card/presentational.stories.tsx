@@ -10,11 +10,6 @@ export default {
 } as Storybook.StoryMeta<typeof Card>;
 
 const Template: Storybook.StoryType<typeof Card> = {
-  render: (args) => <Card {...args} />,
-};
-
-export const Primary: Storybook.StoryType<typeof Card> = {
-  ...Template,
   args: {
     renderBody: () => (
       <div>
@@ -29,4 +24,9 @@ export const Primary: Storybook.StoryType<typeof Card> = {
       </div>
     ),
   },
+  render: (args) => <Card {...args} />,
+};
+
+export const Primary: Storybook.StoryType<typeof Card> = {
+  ...Template,
 };
