@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 import { Card } from "~design/components";
-import { Page } from "~design/layouts";
-import { Main } from "~design/layouts";
+import { Main, Page } from "~design/layouts";
 import { Next } from "~shared/modules";
 
 import { useArticles } from "./index.facade";

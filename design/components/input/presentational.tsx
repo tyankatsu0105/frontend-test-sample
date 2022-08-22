@@ -10,7 +10,7 @@ type Props = {
   readonly className?: React.ComponentProps<"div">["className"];
   readonly errorMessage?: string;
   readonly inputProps: Omit<React.ComponentProps<"input">, "type"> & {
-    type: "text" | "number";
+    type: "text" | "number" | "password";
   };
   readonly isError?: boolean;
   readonly label: string;

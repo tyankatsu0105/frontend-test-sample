@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 
 import { Card } from "~design/components";
-import { Page } from "~design/layouts";
-import { Main } from "~design/layouts";
+import { Main, Page } from "~design/layouts";
 import { Next } from "~shared/modules";
 import { api } from "~store/api";
 import { wrapper } from "~store/index";
