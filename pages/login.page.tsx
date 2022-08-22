@@ -1,26 +1,11 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Input } from "~design/components";
+import { Button, Input } from "~design/components";
 import { Main, Page } from "~design/layouts";
 import { Next } from "~shared/modules";
 
-const schema = z.object({
-  email: z.string().min(1, { message: "Required" }),
-  password: z.string().min(1, { message: "Required" }),
-});
-
-export type FieldValues = z.infer<typeof schema>;
+import { useForm } from "./login.facade";
 
 const Login: Next.NextPageWithLayout = () => {
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<FieldValues>({
-    resolver: zodResolver(schema),
-  });
+  const { errors, handleSubmit, register } = useForm();
 
   return (
     <Page align="center" title="Sign in">
@@ -37,7 +22,7 @@ const Login: Next.NextPageWithLayout = () => {
           isError={!!errors.password}
           label="Password"
         />
-        <button type="submit">aaaaaaaaaa</button>
+        <Button variant="box">Submit</Button>
       </form>
     </Page>
   );

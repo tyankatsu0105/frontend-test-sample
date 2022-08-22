@@ -1,0 +1,17 @@
+.element {
+  padding: 8px 4px;
+  display: inline-block;
+  border-radius: 6px;
+  border-width: 2px;
+  border-style: solid;
+
+  &[data-variant="box"] {
+    border-color: #fff;
+    background-color: #ccc;
+    color: #1f2f54;
+  }
+
+  &[data-variant="outline"] {
+    border-color: #fff;
+  }
+}

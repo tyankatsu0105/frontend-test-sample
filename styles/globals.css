@@ -8,6 +8,11 @@ body {
   white-space: pre-wrap;
 }
 
+button,
+input {
+  cursor: pointer;
+}
+
 *:focus-visible {
   outline: 3px solid rgb(165, 248, 255);
 }
