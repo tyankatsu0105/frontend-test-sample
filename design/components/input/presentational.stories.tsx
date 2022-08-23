@@ -29,3 +29,10 @@ export const Disabled: Storybook.StoryType<typeof Input> = {
     draft.inputProps.disabled = true;
   }),
 };
+
+export const Required: Storybook.StoryType<typeof Input> = {
+  ...Template,
+  args: Storybook.produce(Template.args, (draft) => {
+    draft.inputProps.required = true;
+  }),
+};

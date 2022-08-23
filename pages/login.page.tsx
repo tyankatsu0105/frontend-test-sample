@@ -3,27 +3,38 @@ import { Main, Page } from "~design/layouts";
 import { Next } from "~shared/modules";
 
 import { useForm } from "./login.facade";
+import styles from "./login.module.scss";
 
 const Login: Next.NextPageWithLayout = () => {
-  const { errors, handleSubmit, register } = useForm();
+  const { errors, handleSubmit, onError, onSubmit, register } = useForm();
 
   return (
     <Page align="center" title="Sign in">
-      <form onSubmit={handleSubmit((d) => console.log(d))}>
-        <Input
-          errorMessage={errors.email?.message}
-          inputProps={{ type: "text", ...register("email") }}
-          isError={!!errors.email}
-          label="Email"
-        />
-        <Input
-          errorMessage={errors.password?.message}
-          inputProps={{ type: "text", ...register("password") }}
-          isError={!!errors.password}
-          label="Password"
-        />
-        <Button variant="box">Submit</Button>
-      </form>
+      <div className={styles.wrap}>
+        <form onSubmit={handleSubmit(onSubmit, onError)}>
+          <Input
+            className={styles.input}
+            errorMessage={errors.email?.message}
+            inputProps={{ required: true, type: "text", ...register("email") }}
+            isError={!!errors.email}
+            label="Email"
+          />
+          <Input
+            className={styles.input}
+            errorMessage={errors.password?.message}
+            inputProps={{
+              required: true,
+              type: "password",
+              ...register("password"),
+            }}
+            isError={!!errors.password}
+            label="Password"
+          />
+          <div className={styles.button}>
+            <Button variant="box">Submit</Button>
+          </div>
+        </form>
+      </div>
     </Page>
   );
 };

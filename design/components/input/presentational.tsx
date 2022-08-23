@@ -26,7 +26,12 @@ const Component = (props: Props): JSX.Element => (
     data-disabled={props.inputProps.disabled}
   >
     <label>
-      <span className={styles.label}>{props.label}</span>
+      <span className={styles.label}>
+        <span>{props.label}</span>
+        {props.inputProps.required && (
+          <span className={styles.required}>*</span>
+        )}
+      </span>
       <input
         {...props.inputProps}
         className={styles.input}

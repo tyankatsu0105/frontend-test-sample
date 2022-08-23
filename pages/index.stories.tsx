@@ -13,6 +13,7 @@ export default {
 } as Storybook.StoryMeta<typeof Page>;
 
 const Template: Storybook.StoryType<typeof Page> = {
+  args: {},
   render: (args) => (
     <Main>
       <Page {...args} />

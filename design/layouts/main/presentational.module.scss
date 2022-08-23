@@ -2,28 +2,6 @@
   min-height: 100vh;
 }
 
-.header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  padding: 12px 20px;
-  background: #1f2f54;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  a {
-    text-decoration: underline;
-  }
-}
-
-.navigation {
-  display: grid;
-  column-gap: 8px;
-  grid-template-columns: repeat(4, auto);
-}
-
 .main {
   padding: 20px;
 }
