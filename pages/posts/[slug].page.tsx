@@ -1,23 +1,21 @@
 import type { GetStaticPaths } from "next";
-import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 
 import { Card } from "~design/components";
 import { Main, Page } from "~design/layouts";
 import { Next } from "~shared/modules";
-import { api } from "~store/api";
+import { api, SingleArticleResponse } from "~store/api";
 import { wrapper } from "~store/index";
 import { createStore } from "~store/index";
 
-import { useArticle } from "./[slug].facade";
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const store = createStore();
-  const { data } = await store.dispatch(api.endpoints.getArticles.initiate({}));
+  const result = await store.dispatch(api.endpoints.getArticles.initiate({}));
 
   return {
     fallback: true,
-    paths: data?.articles.map((article) => `/posts/${article.slug}`) ?? [],
+    paths:
+      result.data?.articles.map((article) => `/posts/${article.slug}`) ?? [],
   };
 };
 
@@ -29,25 +27,27 @@ export const getStaticProps = wrapper.getStaticProps(
   (store) => async (context) => {
     const { slug } = context.params as Params;
 
-    store.dispatch(api.endpoints.getArticle.initiate({ slug }));
+    const result = store.dispatch(api.endpoints.getArticle.initiate({ slug }));
     await Promise.all(api.util.getRunningOperationPromises());
 
+    const { data } = await result;
+
+    if (!data) {
+      return {
+        notFound: true,
+      };
+    }
+
     return {
-      props: {},
+      props: { data },
       revalidate: 60,
     };
   }
 );
 
-const Post: Next.NextPageWithLayout = () => {
-  const router = useRouter();
-
-  const { slug } = router.query as Params;
-  const { data } = useArticle({
-    skip: router.isFallback,
-    slug,
-  });
-
+const Post: Next.NextPageWithLayout<{ data: SingleArticleResponse }> = ({
+  data,
+}) => {
   return (
     <Page title={data?.article.title}>
       <Card
