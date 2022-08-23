@@ -11,6 +11,10 @@ export default {
 } as Storybook.StoryMeta<typeof Page>;
 
 const Template: Storybook.StoryType<typeof Page> = {
+  args: {
+    children: <>contents</>,
+    title: "Top page",
+  },
   render: (args) => (
     <Main>
       <Page {...args} />
@@ -20,7 +24,4 @@ const Template: Storybook.StoryType<typeof Page> = {
 
 export const Primary: Storybook.StoryType<typeof Page> = {
   ...Template,
-  args: {
-    title: "page title",
-  },
 };

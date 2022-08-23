@@ -10,14 +10,14 @@ import { wrapper } from "~store/index";
 import { createStore } from "~store/index";
 
 import { useArticle } from "./[slug].facade";
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const store = createStore();
-  const result = await store.dispatch(api.endpoints.getArticles.initiate({}));
+  const { data } = await store.dispatch(api.endpoints.getArticles.initiate({}));
 
   return {
     fallback: true,
-    paths:
-      result.data?.articles.map((article) => `/posts/${article.slug}`) ?? [],
+    paths: data?.articles.map((article) => `/posts/${article.slug}`) ?? [],
   };
 };
 
@@ -28,17 +28,9 @@ interface Params extends ParsedUrlQuery {
 export const getStaticProps = wrapper.getStaticProps(
   (store) => async (context) => {
     const { slug } = context.params as Params;
-    const result = store.dispatch(api.endpoints.getArticle.initiate({ slug }));
 
+    store.dispatch(api.endpoints.getArticle.initiate({ slug }));
     await Promise.all(api.util.getRunningOperationPromises());
-
-    const { data } = await result;
-
-    if (!data) {
-      return {
-        notFound: true,
-      };
-    }
 
     return {
       props: {},

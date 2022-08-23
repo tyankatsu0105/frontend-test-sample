@@ -10,6 +10,9 @@ export default {
 } as Storybook.StoryMeta<typeof Main>;
 
 const Template: Storybook.StoryType<typeof Main> = {
+  args: {
+    children: <>contents</>,
+  },
   render: (args) => <Main {...args} />,
 };
 
