@@ -2,12 +2,13 @@ import { useRouter } from "next/router";
 import React from "react";
 
 export const useLogout = () => {
-  const { reload } = useRouter();
-  const handleLogout = React.useCallback(() => {
+  const { reload, replace } = useRouter();
+  const handleLogout = React.useCallback(async () => {
     localStorage.removeItem("token");
 
+    await replace("/");
     reload();
-  }, [reload]);
+  }, [reload, replace]);
 
   return {
     handleLogout,

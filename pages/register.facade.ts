@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import * as ReactHookForm from "react-hook-form";
 import * as z from "zod";
 
-import { useLoginMutation } from "~store/api";
+import { useCreateUserMutation } from "~store/api";
 
 const schema = z.object({
   email: z.string().min(1, { message: "Required" }),
   password: z.string().min(1, { message: "Required" }),
+  username: z.string().min(1, { message: "Required" }),
 });
 
 type FieldValues = z.infer<typeof schema>;
@@ -20,13 +21,17 @@ export const useForm = () => {
     resolver: zodResolver(schema),
   });
   const { replace } = useRouter();
-  const [login] = useLoginMutation();
+  const [createUser] = useCreateUserMutation();
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = async (data) => {
     try {
-      const { user } = await login({
-        loginUserRequest: {
-          user: { email: data.email, password: data.password },
+      const { user } = await createUser({
+        newUserRequest: {
+          user: {
+            email: data.email,
+            password: data.password,
+            username: data.username,
+          },
         },
       }).unwrap();
 
