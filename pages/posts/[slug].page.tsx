@@ -4,6 +4,7 @@ import { ParsedUrlQuery } from "querystring";
 import { Card } from "~design/components";
 import { Main, Page } from "~design/layouts";
 import { Next } from "~shared/modules";
+import { DateUtils } from "~shared/utilities";
 import { api, SingleArticleResponse } from "~store/api";
 import { wrapper } from "~store/index";
 import { createStore } from "~store/index";
@@ -53,7 +54,15 @@ const Post: Next.NextPageWithLayout<{ data: SingleArticleResponse }> = ({
       <Card
         renderBody={() => <p>{data?.article.body}</p>}
         renderHead={({ styles }) => (
-          <h2 className={styles.heading}>{data?.article.description}</h2>
+          <>
+            <h2 className={styles.heading}>{data?.article.description}</h2>
+            <p>
+              <span>
+                {DateUtils.format(data?.article.updatedAt, "yyyy/MM/dd HH:mm")}
+              </span>
+              <span> {data?.article.author.username}</span>
+            </p>
+          </>
         )}
       />
     </Page>
