@@ -33,7 +33,7 @@ export const useForm = () => {
       localStorage.setItem("token", user.token);
       await replace("/");
     } catch (error) {
-      console.log({ error });
+      console.error({ error });
     }
   };
   const onError: Parameters<typeof handleSubmit>[1] = (errors, e) => {

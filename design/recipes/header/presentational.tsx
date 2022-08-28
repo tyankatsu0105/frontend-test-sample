@@ -33,11 +33,13 @@ const Component = (): React.ReactElement => {
           Hello, {name || "Guest"}!
         </li>
 
-        <li className={styles.navigationItem}>
-          <Link href="/post">
-            <a>Post</a>
-          </Link>
-        </li>
+        {isLoggedIn && (
+          <li className={styles.navigationItem}>
+            <Link href="/post">
+              <a>Post</a>
+            </Link>
+          </li>
+        )}
 
         {!isLoggedIn && (
           <li className={styles.navigationItem}>

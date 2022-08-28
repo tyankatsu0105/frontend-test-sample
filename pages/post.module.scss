@@ -1,0 +1,16 @@
+.wrap {
+  display: grid;
+  place-items: center;
+}
+.input {
+  width: 500px;
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+.button {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}

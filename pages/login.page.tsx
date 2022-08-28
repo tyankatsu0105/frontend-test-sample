@@ -13,17 +13,18 @@ const Login: Next.NextPageWithLayout = () => {
       <div className={styles.wrap}>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           <Input
+            required
             className={styles.input}
             errorMessage={errors.email?.message}
-            inputProps={{ required: true, type: "text", ...register("email") }}
+            inputProps={{ type: "text", ...register("email") }}
             isError={!!errors.email}
             label="Email"
           />
           <Input
+            required
             className={styles.input}
             errorMessage={errors.password?.message}
             inputProps={{
-              required: true,
               type: "password",
               ...register("password"),
             }}

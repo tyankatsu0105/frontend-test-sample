@@ -9,12 +9,10 @@ import styles from "./presentational.module.scss";
 type Props = {
   readonly className?: React.ComponentProps<"div">["className"];
   readonly errorMessage?: string;
-  readonly inputProps: Omit<React.ComponentProps<"input">, "type"> & {
-    type: "text" | "number" | "password";
-  };
   readonly isError?: boolean;
   readonly label: string;
   readonly required?: boolean;
+  readonly textareaProps: React.ComponentProps<"textarea">;
 };
 
 // =========================
@@ -24,15 +22,15 @@ type Props = {
 const Component = (props: Props): JSX.Element => (
   <div
     className={`${styles.container}  ${props.className}`}
-    data-disabled={props.inputProps.disabled}
+    data-disabled={props.textareaProps.disabled}
   >
     <label>
       <span className={styles.label}>
         <span>{props.label}</span>
         {props.required && <span className={styles.required}>*</span>}
       </span>
-      <input
-        {...props.inputProps}
+      <textarea
+        {...props.textareaProps}
         className={styles.input}
         data-is-error={props.isError}
       />
@@ -41,4 +39,4 @@ const Component = (props: Props): JSX.Element => (
   </div>
 );
 
-export const Input = React.memo(Component);
+export const Textarea = React.memo(Component);

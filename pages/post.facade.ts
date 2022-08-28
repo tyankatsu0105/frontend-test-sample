@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import * as ReactHookForm from "react-hook-form";
 import * as z from "zod";
 
-import { useCreateUserMutation } from "~store/api";
+import { useCreateArticleMutation } from "~store/api";
 
 const schema = z.object({
-  email: z.string().min(1, { message: "Required" }),
-  password: z.string().min(1, { message: "Required" }),
-  username: z.string().min(1, { message: "Required" }),
+  body: z.string().min(1, { message: "Required" }),
+  description: z.string().min(1, { message: "Required" }),
+  title: z.string().min(1, { message: "Required" }),
 });
 
 type FieldValues = z.infer<typeof schema>;
@@ -21,21 +21,21 @@ export const useForm = () => {
     resolver: zodResolver(schema),
   });
   const { replace } = useRouter();
-  const [createUser] = useCreateUserMutation();
+  const [postArticle] = useCreateArticleMutation();
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = async (data) => {
     try {
-      const { user } = await createUser({
-        newUserRequest: {
-          user: {
-            email: data.email,
-            password: data.password,
-            username: data.username,
+      await postArticle({
+        newArticleRequest: {
+          article: {
+            body: data.body,
+            description: data.description,
+            title: data.title,
           },
         },
-      }).unwrap();
+      });
 
-      localStorage.setItem("token", user.token);
+      alert("Success!!");
       await replace("/");
     } catch (error) {
       console.error({ error });
