@@ -23,6 +23,7 @@ const config = {
   ],
   rules: {
     "@typescript-eslint/no-unused-vars": ERROR,
+    "@typescript-eslint/no-var-requires": WARN,
     "react/jsx-sort-props": [
       WARN,
       {

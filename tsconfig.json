@@ -16,6 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "~api/*": ["api/*"],
       "~design/*": ["design/*"],
       "~pages/*": ["pages/*"],
       "~storybook/*": ["storybook/*"],

@@ -3,9 +3,7 @@ import { createWrapper } from "next-redux-wrapper";
 
 import { api } from "./api";
 import * as Reducer from "./reducer";
-type PreloadedState = Parameters<
-  ReturnType<typeof Reducer.createReducer>["reducer"]
->[0];
+export type PreloadedState = ReduxToolkit.PreloadedState<RootState>;
 
 export const createStore = (preloadedState?: PreloadedState) => {
   const { reducer } = Reducer.createReducer();
@@ -19,7 +17,7 @@ export const createStore = (preloadedState?: PreloadedState) => {
   });
 };
 
-export const wrapper = createWrapper<AppState>(() => createStore(), {
+export const wrapper = createWrapper<AppStore>(() => createStore(), {
   debug: process.env.NODE_ENV !== "production",
 });
 
@@ -27,7 +25,7 @@ export const wrapper = createWrapper<AppState>(() => createStore(), {
 // types
 // ==================================================
 
-type AppState = ReturnType<typeof createStore>;
+export type AppStore = ReturnType<typeof createStore>;
 export type RootState = ReturnType<
   ReturnType<typeof Reducer.createReducer>["reducer"]
 >;

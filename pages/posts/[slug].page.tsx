@@ -58,7 +58,10 @@ const Post: Next.NextPageWithLayout<{ data: SingleArticleResponse }> = ({
             <h2 className={styles.heading}>{data?.article.description}</h2>
             <p>
               <span>
-                {DateUtils.format(data?.article.updatedAt, "yyyy/MM/dd HH:mm")}
+                {DateUtils.format(
+                  data?.article.updatedAt ?? "2022",
+                  "yyyy/MM/dd HH:mm"
+                )}
               </span>
               <span> {data?.article.author.username}</span>
             </p>
