@@ -3,6 +3,9 @@ import "../styles/globals.css";
 import { App } from "./decorators/app";
 
 import { Parameters } from "@storybook/react";
+import { initialize, mswDecorator } from "msw-storybook-addon";
+
+initialize();
 
 export const parameters: Parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -14,4 +17,4 @@ export const parameters: Parameters = {
   },
 };
 
-export const decorators = [App];
+export const decorators = [mswDecorator, App];

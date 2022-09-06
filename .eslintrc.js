@@ -13,6 +13,14 @@ const config = {
     "next/core-web-vitals",
     "prettier",
   ],
+  overrides: [
+    {
+      files: ["*stories.tsx"],
+      rules: {
+        "react-hooks/rules-of-hooks": OFF,
+      },
+    },
+  ],
   parser: "@typescript-eslint/parser",
   plugins: [
     "typescript-sort-keys",

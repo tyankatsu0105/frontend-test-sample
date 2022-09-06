@@ -12,7 +12,7 @@ type AppPropsWithLayout = AppProps & {
   Component: Next.NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+export function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   useAuth();
 
   const getLayout = Component.getLayout ?? ((page) => page);
