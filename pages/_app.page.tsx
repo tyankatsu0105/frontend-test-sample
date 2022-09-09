@@ -17,7 +17,9 @@ export function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(<Component {...pageProps} />);
+  const App = () => <Component {...pageProps} />;
+
+  return getLayout(<App />);
 }
 
 export default wrapper.withRedux(MyApp);

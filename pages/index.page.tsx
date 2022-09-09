@@ -35,6 +35,8 @@ const Home: Next.NextPageWithLayout = () => {
   );
 };
 
-Home.getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+export const getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+
+Home.getLayout = getLayout;
 
 export default Home;

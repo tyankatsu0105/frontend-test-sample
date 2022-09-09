@@ -1,5 +1,5 @@
 import { StorybookConfig } from "@storybook/core-common";
-
+import path from "path";
 const config: StorybookConfig = {
   stories: ["../**/*.stories.@(tsx)"],
   addons: [
