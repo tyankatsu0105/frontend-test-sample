@@ -24,7 +24,7 @@ const Post: Next.NextPageWithLayout = () => {
             required
             className={styles.input}
             errorMessage={errors.title?.message}
-            inputProps={{ type: "text", ...register("title") }}
+            inputProps={{ testid: "title", type: "text", ...register("title") }}
             isError={!!errors.title}
             label="Title"
           />
@@ -35,6 +35,7 @@ const Post: Next.NextPageWithLayout = () => {
             isError={!!errors.description}
             label="Description"
             textareaProps={{
+              testid: "description",
               ...register("description"),
             }}
           />
@@ -45,11 +46,16 @@ const Post: Next.NextPageWithLayout = () => {
             isError={!!errors.body}
             label="Body"
             textareaProps={{
+              testid: "body",
               ...register("body"),
             }}
           />
           <div className={styles.button}>
-            <Button disabled={isSubmitted && !isValid} variant="box">
+            <Button
+              disabled={isSubmitted && !isValid}
+              testid="submit"
+              variant="box"
+            >
               Submit
             </Button>
           </div>
@@ -59,6 +65,8 @@ const Post: Next.NextPageWithLayout = () => {
   );
 };
 
-Post.getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+export const getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+
+Post.getLayout = getLayout;
 
 export default Post;

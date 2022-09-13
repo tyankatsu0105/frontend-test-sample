@@ -5,7 +5,7 @@ import { Next } from "~shared/modules";
 import { useForm } from "./register.facade";
 import styles from "./register.module.scss";
 
-const Login: Next.NextPageWithLayout = () => {
+const Register: Next.NextPageWithLayout = () => {
   const {
     errors,
     handleSubmit,
@@ -53,7 +53,11 @@ const Login: Next.NextPageWithLayout = () => {
             label="Username"
           />
           <div className={styles.button}>
-            <Button disabled={isSubmitted && !isValid} variant="box">
+            <Button
+              disabled={isSubmitted && !isValid}
+              testid="submit"
+              variant="box"
+            >
               Submit
             </Button>
           </div>
@@ -63,6 +67,8 @@ const Login: Next.NextPageWithLayout = () => {
   );
 };
 
-Login.getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+export const getLayout = Next.getLayout((page) => <Main>{page}</Main>);
 
-export default Login;
+Register.getLayout = getLayout;
+
+export default Register;

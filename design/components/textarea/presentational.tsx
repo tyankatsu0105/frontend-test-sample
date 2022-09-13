@@ -12,7 +12,9 @@ type Props = {
   readonly isError?: boolean;
   readonly label: string;
   readonly required?: boolean;
-  readonly textareaProps: React.ComponentProps<"textarea">;
+  readonly textareaProps: React.ComponentProps<"textarea"> & {
+    testid?: string;
+  };
 };
 
 // =========================
@@ -33,9 +35,17 @@ const Component = (props: Props): JSX.Element => (
         {...props.textareaProps}
         className={styles.input}
         data-is-error={props.isError}
+        data-testid={props.textareaProps.testid}
       />
     </label>
-    {props.isError && <p className={styles.error}>{props.errorMessage}</p>}
+    {props.isError && (
+      <p
+        className={styles.error}
+        data-testid={`errorMessage-${props.textareaProps.testid}`}
+      >
+        {props.errorMessage}
+      </p>
+    )}
   </div>
 );
 
