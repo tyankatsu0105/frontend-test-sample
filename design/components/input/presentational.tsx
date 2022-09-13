@@ -51,7 +51,14 @@ const Component = (props: Props): JSX.Element => {
           data-testid={inputProps.testid}
         />
       </label>
-      {isError && <p className={styles.error}>{errorMessage}</p>}
+      {isError && (
+        <p
+          className={styles.error}
+          data-testid={`errorMessage-${inputProps.testid}`}
+        >
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 };

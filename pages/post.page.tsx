@@ -6,7 +6,15 @@ import { useForm } from "./post.facade";
 import styles from "./post.module.scss";
 
 const Post: Next.NextPageWithLayout = () => {
-  const { errors, handleSubmit, onError, onSubmit, register } = useForm();
+  const {
+    errors,
+    handleSubmit,
+    isSubmitted,
+    isValid,
+    onError,
+    onSubmit,
+    register,
+  } = useForm();
 
   return (
     <Page align="center" title="Post">
@@ -41,7 +49,9 @@ const Post: Next.NextPageWithLayout = () => {
             }}
           />
           <div className={styles.button}>
-            <Button variant="box">Submit</Button>
+            <Button disabled={isSubmitted && !isValid} variant="box">
+              Submit
+            </Button>
           </div>
         </form>
       </div>

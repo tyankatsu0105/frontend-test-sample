@@ -6,7 +6,15 @@ import { useForm } from "./login.facade";
 import styles from "./login.module.scss";
 
 const Login: Next.NextPageWithLayout = () => {
-  const { errors, handleSubmit, onError, onSubmit, register } = useForm();
+  const {
+    errors,
+    handleSubmit,
+    isSubmitted,
+    isValid,
+    onError,
+    onSubmit,
+    register,
+  } = useForm();
 
   return (
     <Page align="center" title="Sign in">
@@ -37,7 +45,11 @@ const Login: Next.NextPageWithLayout = () => {
             label="Password"
           />
           <div className={styles.button}>
-            <Button testid="submit" variant="box">
+            <Button
+              disabled={isSubmitted && !isValid}
+              testid="submit"
+              variant="box"
+            >
               Submit
             </Button>
           </div>

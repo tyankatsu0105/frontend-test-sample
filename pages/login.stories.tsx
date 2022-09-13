@@ -58,3 +58,25 @@ export const Primary: Storybook.StoryType<typeof Page> = {
     });
   },
 };
+
+export const ErrorForm: Storybook.StoryType<typeof Page> = {
+  ...Primary,
+  play: async () => {
+    const emailElement = screen.getByTestId("email");
+    await userEvent.type(emailElement, "");
+
+    const passwordElement = screen.getByTestId("password");
+    await userEvent.type(passwordElement, "");
+
+    const button = screen.getByTestId("submit");
+    await userEvent.click(button);
+
+    await waitFor(async () => {
+      const emailErrorMessage = screen.getByTestId("errorMessage-email");
+      await expect(emailErrorMessage.textContent).toBe("Required");
+
+      const passwordErrorMessage = screen.getByTestId("errorMessage-password");
+      await expect(passwordErrorMessage.textContent).toBe("Required");
+    });
+  },
+};

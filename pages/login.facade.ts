@@ -13,7 +13,7 @@ const schema = z.object({
 type FieldValues = z.infer<typeof schema>;
 export const useForm = () => {
   const {
-    formState: { errors },
+    formState: { errors, isSubmitted, isValid },
     handleSubmit,
     register,
   } = ReactHookForm.useForm<FieldValues>({
@@ -45,6 +45,8 @@ export const useForm = () => {
   return {
     errors,
     handleSubmit,
+    isSubmitted,
+    isValid,
     onError,
     onSubmit,
     register,

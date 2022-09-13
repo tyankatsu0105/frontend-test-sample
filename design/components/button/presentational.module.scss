@@ -14,4 +14,10 @@
   &[data-variant="outline"] {
     border-color: #fff;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+    border-color: #ccc;
+  }
 }
