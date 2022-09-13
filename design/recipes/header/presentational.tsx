@@ -29,7 +29,10 @@ const Component = (): React.ReactElement => {
       </div>
 
       <ul className={styles.navigation}>
-        <li className={`${styles.navigationItem} ${styles.navigationItemName}`}>
+        <li
+          className={`${styles.navigationItem} ${styles.navigationItemName}`}
+          data-testid="header-username"
+        >
           Hello, {name || "Guest"}!
         </li>
 

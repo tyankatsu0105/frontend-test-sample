@@ -6,11 +6,12 @@ import styles from "./presentational.module.scss";
 // props
 // =========================
 
-type Props = {
-  readonly className?: React.ComponentProps<"div">["className"];
+type Props = React.ComponentProps<"div"> & {
   readonly errorMessage?: string;
   readonly inputProps: Omit<React.ComponentProps<"input">, "type"> & {
     type: "text" | "number" | "password";
+  } & {
+    readonly testid?: string;
   };
   readonly isError?: boolean;
   readonly label: string;
@@ -21,24 +22,38 @@ type Props = {
 // component
 // =========================
 
-const Component = (props: Props): JSX.Element => (
-  <div
-    className={`${styles.container}  ${props.className}`}
-    data-disabled={props.inputProps.disabled}
-  >
-    <label>
-      <span className={styles.label}>
-        <span>{props.label}</span>
-        {props.required && <span className={styles.required}>*</span>}
-      </span>
-      <input
-        {...props.inputProps}
-        className={styles.input}
-        data-is-error={props.isError}
-      />
-    </label>
-    {props.isError && <p className={styles.error}>{props.errorMessage}</p>}
-  </div>
-);
+const Component = (props: Props): JSX.Element => {
+  const {
+    className,
+    errorMessage,
+    inputProps,
+    isError,
+    label,
+    required,
+    ...restProps
+  } = props;
+
+  return (
+    <div
+      {...restProps}
+      className={`${styles.container}  ${className}`}
+      data-disabled={inputProps.disabled}
+    >
+      <label>
+        <span className={styles.label}>
+          <span>{label}</span>
+          {required && <span className={styles.required}>*</span>}
+        </span>
+        <input
+          {...inputProps}
+          className={styles.input}
+          data-is-error={isError}
+          data-testid={inputProps.testid}
+        />
+      </label>
+      {isError && <p className={styles.error}>{errorMessage}</p>}
+    </div>
+  );
+};
 
 export const Input = React.memo(Component);

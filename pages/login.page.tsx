@@ -16,7 +16,11 @@ const Login: Next.NextPageWithLayout = () => {
             required
             className={styles.input}
             errorMessage={errors.email?.message}
-            inputProps={{ type: "text", ...register("email") }}
+            inputProps={{
+              testid: "email",
+              type: "text",
+              ...register("email"),
+            }}
             isError={!!errors.email}
             label="Email"
           />
@@ -25,6 +29,7 @@ const Login: Next.NextPageWithLayout = () => {
             className={styles.input}
             errorMessage={errors.password?.message}
             inputProps={{
+              testid: "password",
               type: "password",
               ...register("password"),
             }}
@@ -32,7 +37,9 @@ const Login: Next.NextPageWithLayout = () => {
             label="Password"
           />
           <div className={styles.button}>
-            <Button variant="box">Submit</Button>
+            <Button testid="submit" variant="box">
+              Submit
+            </Button>
           </div>
         </form>
       </div>
@@ -40,6 +47,8 @@ const Login: Next.NextPageWithLayout = () => {
   );
 };
 
-Login.getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+export const getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+
+Login.getLayout = getLayout;
 
 export default Login;

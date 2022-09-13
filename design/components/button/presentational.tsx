@@ -11,7 +11,8 @@ import styles from "./presentational.module.scss";
 const defaultElement = "button";
 
 type FeatureProps = {
-  variant: "box" | "outline";
+  readonly testid?: string;
+  readonly variant: "box" | "outline";
 };
 
 type Props<T extends React.ElementType = typeof defaultElement> =
@@ -24,13 +25,14 @@ type Props<T extends React.ElementType = typeof defaultElement> =
 const Component = <T extends React.ElementType = typeof defaultElement>(
   props: Props<T>
 ): JSX.Element => {
-  const { as, className, variant, ...restProps } = props;
+  const { as, className, testid, variant, ...restProps } = props;
   const Element = as || defaultElement;
 
   return (
     <Element
       {...restProps}
       className={`${className} ${styles.element}`}
+      data-testid={testid}
       data-variant={variant}
     />
   );
