@@ -24,29 +24,29 @@ interface Params extends ParsedUrlQuery {
   slug: string;
 }
 
-export const getStaticProps = wrapper.getStaticProps(
-  (store) => async (context) => {
-    const { slug } = context.params as Params;
+export const getStaticProps = wrapper.getStaticProps<{
+  data: SingleArticleResponse;
+}>((store) => async (context) => {
+  const { slug } = context.params as Params;
 
-    const result = store.dispatch(api.endpoints.getArticle.initiate({ slug }));
-    await Promise.all(api.util.getRunningOperationPromises());
+  const result = store.dispatch(api.endpoints.getArticle.initiate({ slug }));
+  await Promise.all(api.util.getRunningOperationPromises());
 
-    const { data } = await result;
+  const { data } = await result;
 
-    if (!data) {
-      return {
-        notFound: true,
-      };
-    }
-
+  if (!data) {
     return {
-      props: { data },
-      revalidate: 60,
+      notFound: true,
     };
   }
-);
 
-const Post: Next.NextPageWithLayout<{ data: SingleArticleResponse }> = ({
+  return {
+    props: { data },
+    revalidate: 60,
+  };
+});
+
+const Posts: Next.NextPageWithLayout<{ data: SingleArticleResponse }> = ({
   data,
 }) => {
   return (
@@ -72,5 +72,7 @@ const Post: Next.NextPageWithLayout<{ data: SingleArticleResponse }> = ({
   );
 };
 
-Post.getLayout = Next.getLayout((page) => <Main>{page}</Main>);
-export default Post;
+export const getLayout = Next.getLayout((page) => <Main>{page}</Main>);
+
+Posts.getLayout = getLayout;
+export default Posts;
